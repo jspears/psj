@@ -13,10 +13,22 @@ var xmltests = {
     '<c:set var="#">hello</c:set>':"prefix:c, tag:set attrs: {\"var\":\"#\"}, buffer:hello",
     '<!-- hello <c:set var="#"/> me -->':"content:<!-- hello  prefix:c, tag:set attrs: {\"var\":\"#\"} content: me -->"
 };
-var tests = {}, junk={
+var tests ={
+    'throw exeption unknown page directive':function(test){
+        parser = new Parser();
+        var threw = true;
+        try {
+        var result = parser.parse('<%-- hello --%><%@ taglib prefix="p" tagdir="."%>  <%@nosuchtag %>')
+            threw = false;
+        }catch(e){
+            test.equal(e.message, "Can not have tag directives in the body @[0,5] >>-%><% char:\"@\"  taglib<<<");
+        }
+        test.equals(threw, true, "throw an error")
+        test.done();
+    },
     'test if taglib parsed': function (test) {
         parser = new Parser();
-        var result = parser.parse('<%@ taglib prefix="p" tagdir="."%>')
+        var result = parser.parse('<%@ taglib prefix="p" tagdir="."%>').context;
         test.equal(result.taglib.p.prefix, 'p');
         test.equal(result.taglib.p.tagdir, '.');
         test.done();
@@ -25,7 +37,7 @@ var tests = {}, junk={
 
     'parsing attributes parsed': function (test) {
         parser = new Parser();
-        var result = parser.parse('<%@ attribute name="people" type="Array"%>')
+        var result = parser.parse('<%@ attribute name="people" type="Array"%>').context;
         test.equal(result.attribute[0].name, 'people');
         test.equal(result.attribute[0].type, 'Array');
         test.done();
@@ -33,7 +45,7 @@ var tests = {}, junk={
     },
     'do comments work': function (test) {
         parser = new Parser();
-        var result = parser.parse('<%-- hello\n this is a comment --%>');
+        var result = parser.parse('<%-- hello\n this is a comment --%>').context;
 
         test.equal(result.content[0](), ' hello\n this is a comment ');
         test.done();
@@ -42,7 +54,7 @@ var tests = {}, junk={
         parser = new Parser();
         var e = null;
         try {
-            var result = parser.parse('<%-- hello\n this is a comment %>');
+           parser.parse('<%-- hello\n this is a comment %>');
         } catch (err) {
             e = err;
         }

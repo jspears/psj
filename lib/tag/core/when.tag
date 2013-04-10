@@ -1,0 +1,1 @@
+<%@attribute name="test" rtexprvalue="true" required="true" %>

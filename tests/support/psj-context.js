@@ -1,4 +1,4 @@
-var OContext = require('../lib/psj-context'), util=require('util');
+var OContext = require('../../lib/psj-context'), util=require('util');
 var Context = function(options, parent){
     OContext.apply(this, arguments);
 }

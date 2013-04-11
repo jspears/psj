@@ -3,4 +3,5 @@
 <h3>${fn:title(person.fullName)}</h3>
 <div>
     ${person.description}
+    <jsp:doBody/>
 </div>

@@ -1,4 +1,4 @@
-var Parser = require('./psj-test-context'), fs = require('fs');
+var Parser = require('./support/psj-context'), fs = require('fs');
 var parser;
 var xmltests = {
     '<c:out var="has>end"/>':"prefix:c, tag:out attrs: {\"var\":\"has>end\"}",
@@ -14,6 +14,12 @@ var xmltests = {
     '<!-- hello <c:set var="#"/> me -->':"content:<!-- hello  prefix:c, tag:set attrs: {\"var\":\"#\"} content: me -->"
 };
 var tests ={
+    'parse some body':function(test){
+        parser = new Parser();
+        console.log(printResult(parser.parseBody('<%-- comment --%> hello ${var} with ${stuff} <c:out>more stuff</c:out>').context));
+
+        test.done();
+    },
     'throw exeption unknown page directive':function(test){
         parser = new Parser();
         var threw = true;
@@ -21,7 +27,7 @@ var tests ={
         var result = parser.parse('<%-- hello --%><%@ taglib prefix="p" tagdir="."%>  <%@nosuchtag %>')
             threw = false;
         }catch(e){
-            test.equal(e.message, "Can not have tag directives in the body @[0,5] >>-%><% char:\"@\"  taglib<<<");
+            test.equal(e.message, "Can not have tag directives in the body @[0,5] -%><%--\"@\"--  taglib");
         }
         test.equals(threw, true, "throw an error")
         test.done();

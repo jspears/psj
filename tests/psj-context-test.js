@@ -1,38 +1,35 @@
-var Context = require('../lib/psj-context'), fs = require('fs'), Q = require('q'), path = require('path');
+var Context = require('../lib/psj-context'),
+    _ = require('underscore'),
+    resolver = require('../lib/psj-local-resolver'),
+    fs = require('fs'), Q = require('q'), path = require('path'), Tag = require('../lib/tag-function');
 
-var ctxMap = {
-    'http://java.sun.com/jsp/jstl/core': 'lib/tag/core',
-    'http://java.sun.com/JSP/Page': 'lib/tag/jsp'
-}
 var core = '<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>'
-function resolver(v, file) {
-    var f = ctxMap[v.uri || v.tagdir || v] || v.uri || v.tagdir;
-    var d = Q.defer();
-    fs.readFile(path.join(f, file) + '.tag', 'utf-8', d.makeNodeResolver());
-    return d.promise;
-
-}
 
 module.exports = {
-
+//    'test content':function(test){
+//        var str = fs.readFileSync('./tests/support/foreach-junk.js', 'utf-8');
+//
+//        _.template(str);
+//        test.done();
+//    },
     'test forEach tag': function (test) {
         var ctx = new Context(null, null, resolver);
-        ctx.parse(core + '<c:forEach items="myitems" varStatus="loop">hello ${loop.begin} ${loop.count}</c:forEach>  this is some text');
-        ctx.template().when(function (promise) {
-
-            console.log(promise.valueOf());
-            test.done();
-        });
-
+        ctx.parse(core + '<c:forEach items="${myitems}" var="item" varStatus="loop">hello "${item}" - "${loop.first}" - "${loop.current}"</c:forEach>  this is some text');
+        ctx.render({myitems:'abcd'.split('')}, function(out){
+             out = out.replace(/\s+/g, ' ');
+            console.log('out', out);
+            test.equals(out,"hello \" a \" - \" true \" - \" a \"hello \" b \" - \" false \" - \" b \"hello \" c \" - \" false \" - \" c \"hello \" d \" - \" false \" - \" d \" this is some text");
+            test.done()
+        })
     }
-    ,
-    'test require tag': function (test) {
-        var ctx = new Context(null, null, resolver);
-        ctx.parse(core + '<c:out var="test"/>  this is some text');
-        ctx.template().when(function (promise) {
-            console.log(promise.valueOf());
-            test.done();
-        });
-
-    }
+//    ,
+//    'test require tag': function (test) {
+//        var ctx = new Context(null, null, resolver);
+//        ctx.parse(core + '<c:out var="test"/>  this is some text');
+//        ctx.template().when(function (promise) {
+//            console.log(promise.valueOf());
+//            test.done();
+//        });
+//
+//    }
 }

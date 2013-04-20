@@ -1,2 +1,1 @@
-hello
-    <jsp:doBody/>
+<jsp:doBody/>

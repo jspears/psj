@@ -7,6 +7,18 @@ var tu = require('../lib/text-util'),
 var str = 'abcdefg';
 
 module.exports = {
+    'matchy any at pos ':function(test){
+       "abcd fg"
+        var any = [">",'/>'].concat(tu.whitespace_chars);
+
+        tu.match_any("abc>573")
+        tu.match_any("abc/>573")
+        tu.match_any("abc 573")
+        tu.match_any("abc\n573")
+        tu.match_any("abc\t573")
+
+        test.done();
+    },
     'test whitespace chars': function (test) {
         test.equals(whitespace(' '), true);
         test.equals(whitespace('\n'), true);

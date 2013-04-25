@@ -13,24 +13,29 @@
                     });
                     items = nitems;
  }
+
   begin = begin || 0;
   end = end || items.length;
   step = step || 1;
   for (var i = begin; i < end; i += step) {
      var current = items[i];
+    console.log('forEach.tag', current);
     if (varStatus)
-    pageScope[varStatus] = {
+    obj.pageScope[varStatus] = {
         first: i == begin,
          last: begin + step >= end,
+        index:i,
       current: current
     };
+     if (varName)
+  obj.pageScope[varName] = current;
 
- if (varName)
-  pageScope[varName] = current;
-
+try {
 %>
 <jsp:doBody/>
 <%
+}catch(e){
+ console.log('caught error in forEach:doBody', e.message);
 }
-
+}
 %>

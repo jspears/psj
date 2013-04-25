@@ -1,7 +1,6 @@
 var Parser = require('./support/psj-context'), fs = require('fs');
 var parser;
 var xmltests = {
-   '<c:if test="stuff">hello</c:if><c:if test="nostuff">goodbye</c:if>': "prefix:c, tag:if attrs: {\"test\":\"stuff\"}, buffer:hello prefix:c, tag:if attrs: {\"test\":\"nostuff\"}, buffer:goodbye",
     '<c:out var="has\'end"/>': "prefix:c, tag:out attrs: {\"var\":\"has'end\"}",
     "<c:out var='hasend'/>": "prefix:c, tag:out attrs: {\"var\":\"hasend\"}",
     '<c:out var="test"/><c:set var="junk" scope="request">I am <bold/></c:set>': 'prefix:c, tag:out attrs: {\"var\":\"test\"} prefix:c, tag:set attrs: {\"var\":\"junk\",\"scope\":\"request\"}, buffer:I am <bold/>',
@@ -16,7 +15,10 @@ var xmltests = {
     '<%@taglib prefix="core"  uri="http://java.sun.com/jsp/jstl/core" %>\n<core:when test=\"${empty myitems}\">hello</core:when><core:otherwise>goodbye</core:otherwise>': "prefix:core, tag:when attrs: {\"test\":\"${empty myitems}\"}, buffer:hello prefix:core, tag:otherwise attrs: {}, buffer:goodbye",
     '<c:out var="has>end"/>': "prefix:c, tag:out attrs: {\"var\":\"has>end\"}",
     '<c:out/>': 'prefix:c, tag:out attrs: {}',
-    '<c:out var="test">hello<c:out>what</c:out></c:out>': 'prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:hello<c:out>what</c:out>'
+    '<c:if test="stuff">hello</c:if><c:if test="nostuff">goodbye</c:if>': "prefix:c, tag:if attrs: {\"test\":\"stuff\"}, buffer:hello prefix:c, tag:if attrs: {\"test\":\"nostuff\"}, buffer:goodbye",
+    '<c:out var="test">hello<c:out>what</c:out></c:out>': "prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:hello<c:out>what</c:out>",
+    '<c:out var="test"><c:out>what</c:out></c:out>': "prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:<c:out>what</c:out>",
+    '<c:out var="test">hello<c:out>what</c:out> more </c:out>': "prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:hello<c:out>what</c:out> more "
 };
 var tests = {
 };

@@ -1,6 +1,12 @@
 var PsjEval = require('../lib/psj-eval-expression');
 
 module.exports = {
+    'empty expression':function(test){
+        var out = PsjEval.expression('${empty value}')({value:[1,2,3]});
+        test.equals(out,false, "not empty");
+        test.done();
+    }
+    ,
     'Expression.expression array out':function(test){
         var out = PsjEval.expression('${value}')({value:[1,2,3]});
         test.ok(out.length === 3, "Number of items");
@@ -10,11 +16,11 @@ module.exports = {
         test.done();
     }
     ,'Evaluate a JSTL expression': function (test) {
-        var pe = new PsjEval(" noti lt default and noti gt 0 and(not.d mod 3)");
+        var pe = new PsjEval(" noti lt default && noti eq not.d");
         var ev = pe.create();
-        test.ok(ev({noti: 1, 'default': 2, 'not': {'d': 1}}), "Should be true");
-        test.ok(!ev({noti: 2, 'default': 2, 'not': {'d': 2}}), "Should be false");
-        test.ok(!ev({noti: 3, 'default': 1, 'not': {'d': 3}}), "Should be false");
+        test.ok(ev( {noti: 1, 'default': 2, 'not': {'d': 1}}), "Should be true 1");
+        test.ok(!ev({noti: 2, 'default': 2, 'not': {'d': 2}}), "Should be false 2");
+        test.ok(!ev({noti: 3, 'default': 1, 'not': {'d': 3}}), "Should be false 3");
         test.done();
     },
 

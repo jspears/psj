@@ -5,7 +5,7 @@
 <%@ attribute name="var" type="String" required="false" rtexprvalue="false" %>
 <%@ attribute name="varStatus" type="String" required="false" rtexprvalue="false" %>
 <%
- var varName = obj.var;
+ var varName = obj.var || obj._var;
  if (!(typeof items === "string" || Array.isArray(items))) {
                     var keys = Object.keys(items);
                     var nitems = keys.map(function (v) {
@@ -21,14 +21,14 @@
      var current = items[i];
     console.log('forEach.tag', current);
     if (varStatus)
-    obj.pageScope[varStatus] = {
+        obj[varStatus] = obj.pageScope[varStatus] = {
         first: i == begin,
          last: begin + step >= end,
         index:i,
       current: current
     };
      if (varName)
-  obj.pageScope[varName] = current;
+           obj[varName] = obj.pageScope[varName] = current;
 
 try {
 %>

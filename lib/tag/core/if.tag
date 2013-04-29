@@ -1,4 +1,7 @@
 <%@attribute name="test" rtexprvalue="true" required="true" %>
-<% if(test !== undefined && test !== null && test !== false ){ %>
+
+<%
+ console.log('test value', test);
+ if(!(test === void(0) || test === null || test === false || test === '')){ %>
     <jsp:doBody/>
 <% } %>

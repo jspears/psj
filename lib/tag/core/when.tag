@@ -1,4 +1,6 @@
 <%@attribute name="test" rtexprvalue="true" required="true" %>
-<% if(test){ %>
-    <jsp:doBody/>
+<% if(test){
+    this.tagContent.parent._test = true;
+ %>
+   <jsp:doBody/>
 <% } %>

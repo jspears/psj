@@ -1,14 +1,15 @@
 {
-  "name": "application-name",
+  "name": "psj",
+  "description":"A JSP Like implementation for nodejs",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.1.1",
-    "jshtml": "*",
-      "q":"latest",
-    "underscore":"latest"
+    "q":"latest",
+    "underscore":"latest",
+    "exprjs":"git+https://github.com/jspears/exprjs",
+    "amdefine":"latest"
   }
 }

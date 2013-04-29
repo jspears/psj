@@ -14,7 +14,9 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jshtml');
+app.engine('jsp', require('./psj'));
+//app.set('view engine', 'jshtml');
+app.set('view engine', 'jsp');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());

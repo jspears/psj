@@ -21,6 +21,13 @@ var xmltests = {
     '<c:out var="test">hello<c:out>what</c:out> more </c:out>': "prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:hello<c:out>what</c:out> more "
 };
 var tests = {
+    'parse html':function(test){
+        parser = new Parser();
+        var html = '<html><head>hello</head><body>hello</body></html>';
+        var result = parser.parse(html);
+        test.equals(printResult(result), 'content:'+html);
+        test.done();
+    }
 };
 
 Object.keys(xmltests).forEach(function makeTestFunction(k) {

@@ -34,7 +34,9 @@ util._extend(OContext.prototype, {
         this.content.push(function () {
             return  buffer;
         })
-    }
+    },
+    parseEnd:function(){},
+    parseBodyEnd:function(){}
 });
 
 module.exports = Context;

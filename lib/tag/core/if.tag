@@ -1,5 +1,4 @@
 <%@attribute name="test" rtexprvalue="true" required="true" %>
-<% if(test){ %>
-    debugger;
+<% if(test !== undefined && test !== null && test !== false ){ %>
     <jsp:doBody/>
 <% } %>

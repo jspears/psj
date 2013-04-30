@@ -78,8 +78,8 @@ module.exports = {
             var ctx = new Context(null, null, resolver, 'test#choose-when-otherwise');
             ctx.parse('<%@taglib prefix="core"  uri="http://java.sun.com/jsp/jstl/core" %>' +
                 '<core:choose>' +
-                '   <core:when test="${not empty items}">say </core:when>' +
-                '   <core:when test="${empty myitems}">hello</core:when>' +
+                '   <core:when test="${empty items == true}">hello </core:when>' +
+                '   <core:when test="${empty myitems}">my name</core:when>' +
                 '   <core:when test="${not empty items}">say </core:when>' +
                 '   <core:otherwise>goodbye</core:otherwise>' +
                 '</core:choose>');

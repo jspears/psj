@@ -19,6 +19,7 @@ var xmltests = {
     '<c:out var="test">hello<c:out>what</c:out></c:out>': "prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:hello<c:out>what</c:out>",
     '<c:out var="test"><c:out>what</c:out></c:out>': "prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:<c:out>what</c:out>",
     '<c:out var="test">hello<c:out>what</c:out> more </c:out>': "prefix:c, tag:out attrs: {\"var\":\"test\"}, buffer:hello<c:out>what</c:out> more "
+//    '<html><head><title>${hello}</title></head><body>hello</body></html>':"content:<html><head><title> <%=this.tagScope.$31._eleval(obj) %> content:</title></head><body>hello</body></html>"
 };
 var tests = {
     'parse html':function(test){
@@ -27,6 +28,14 @@ var tests = {
         var result = parser.parse(html);
         test.equals(printResult(result), 'content:'+html);
         test.done();
+    },
+    'parse jsp':function(test){
+        parser = new Parser();
+        var html = fs.readFileSync(__dirname+'/../example/views/index.jsp', 'utf-8');
+        var result = parser.parse(html);
+        test.equals(printResult(result), "content:<html>\n    <head>\n         <title>hello world</title>\n    </head>\n    <body>\n        <h2>hello  expression:title, tag:undefined attrs: {} prefix:example, tag:people attrs: {\"people\":\"${people}\"} content:\n     </body>\n</html>\n\n");
+        test.done();
+
     }
 };
 

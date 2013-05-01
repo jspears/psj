@@ -16,6 +16,11 @@ util._extend(OContext.prototype, {
             return "prefix:" + prefix + ", tag:" + tag + " attrs: " + JSON.stringify(attrs ?attrs : {}) + (buffer ? ", buffer:" + buffer : '');
         });
     },
+    parseExpr: function parseTag(prefix, tag, attrs, buffer) {
+        this.content.push(function () {
+            return "expression:" + prefix + ", tag:" + tag + " attrs: " + JSON.stringify(attrs ?attrs : {}) + (buffer ? ", buffer:" + buffer : '');
+        });
+    },
 
     parseEval: function parseEval(buffer) {
         this.content.push(function () {

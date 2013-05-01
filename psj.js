@@ -9,5 +9,8 @@ module.exports = function(source, options, fn){
         return ctx;
     })());
 
-    psj.render(options, fn);
+    psj.render(options, function(err,out){
+        console.log('sending ',out);
+        fn(err,out);
+    });
 }

@@ -1,13 +1,13 @@
 #A Pure JS implementation of JSP.
-Giving it a go.   I think JSP2.2 got a lot right, particularly in the *.tag file bit. Something that most template engines in
+Giving it a go.   I think JSP2 got a lot right, particularly in the .tag file bit. It does something that most template engines in
 javascript land fail miserable at, including other templates.   So this is my attempt of implementing a JSP template engine
 in JS.   It's mostly working.  Have a bunch of tags to write, but for the most part it should be working.
 
-##Usage: No usage yet see JSP - work in progress.
-So there is an example sort of app.js, going to rework these bits move it all to an example directory.
+#Usage:
+see example/app.js
 
-
-Working so far:
+#State:
+##Working so far:
 *Express Plugin
 *c:forEach
 *c:set
@@ -19,10 +19,11 @@ Working so far:
 *JSP EL
 *tag attributes.
 
-Not implemented:
+##Not implemented:
 * &gt;jsp:attribute&lt;
 * all the rest of the tags.
-* bootstrapping for client side functionality.
+* bootstrapping for client side JSP rendering.
+
 
 
 

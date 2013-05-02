@@ -13,7 +13,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.engine('jsp', require('./../psj'));
+app.engine('jsp', require('../index'));
 app.set('view engine', 'jsp');
 app.use(express.favicon());
 app.use(express.logger('dev'));

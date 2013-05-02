@@ -2,7 +2,7 @@
   "name": "psj",
   "author": "Justin <speajus@gmail.com>",
   "description": "A JSP Like implementation for nodejs",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": false,
   "keywords": [
     "jsp",

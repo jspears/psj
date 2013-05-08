@@ -1,0 +1,30 @@
+{
+    "name": "psj-spa",
+    "version": "0.0.1",
+    "description": "Example Single Page Application using PSJ",
+    "main": "app.js",
+    "scripts": {
+        "test": "nodeunit tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/jspears/psj/examples/spa"
+    },
+    "keywords": [
+        "spa",
+        "jsp",
+        "node",
+        "template",
+        ""
+    ],
+    "author": "speajus@gmail.com",
+    "license": "NONE",
+    "jam": {
+        "packageDir": "public/jam",
+        "baseUrl":"jam",
+        "dependencies": {
+            "psj": "linked",
+            "bootstrap":"2.3.1"
+        }
+    }
+}

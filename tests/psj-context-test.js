@@ -19,7 +19,10 @@ module.exports = {
                 done()
             });
         }
-        render(function(){ render(test.done.bind(test)) });
+
+        render(function () {
+            render(test.done.bind(test))
+        });
 
     },
     'if-if': function (test) {
@@ -42,7 +45,7 @@ module.exports = {
         var ctx = new Context(null, null, resolver, 'test set tag request scope');
         ctx.parse(core + '<c:set var="myvar" scope="request" value="${myvalue}"/><c:set var="test2" value="${myvar}"/> this is some text');
         //    var scope = new Scope();
-        ctx.render({myvalue: 1}, function (err, out) {
+        ctx.render(new Scope({myvalue: 1}), function (err, out) {
 //            test.equals(scope.scope.requestScope.myvar, 1);
 //            test.equals(scope.scope.pageScope.test2, 1);
             test.equals(out, '\n\n this is some text');

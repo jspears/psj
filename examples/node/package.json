@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "express":"latest",
-    "psj":"git+https://github.com/jspears/psj",
+    "psj":"git+https://github.com/jspears/psj"
   }
 }

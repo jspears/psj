@@ -52,7 +52,7 @@
                 console.log('<xsl:value-of select="//tag:name"/>:<xsl:value-of select="tag:name"/> is not implemented ');
             }
     </xsl:template>
-    <xsl:template match="tag:name"/>
+
     <xsl:template match="tag:description">
         <xsl:value-of select="concat('', $lt, '--', ., '--', $gt,$nl)"/>
     </xsl:template>
@@ -68,7 +68,7 @@
         <xsl:value-of select="concat('',$gt,$nl)"/>
     </xsl:template>
 
-    <xsl:template match="tag:body-content | tag:tag-class | tag:tei-class | tag:function-signature | tag:function-class | tag:display-name | tag:uri | tag:validator | text()"/>
+    <xsl:template match="tag:body-content | tag:name | tag:tag-class | tag:tei-class | tag:function-signature | tag:function-class | tag:display-name | tag:uri | tag:validator | text()"/>
     <xsl:template match="*">
         <xsl:message terminate="no">
             WARNING: Unmatched element:
